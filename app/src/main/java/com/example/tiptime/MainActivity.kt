@@ -58,6 +58,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Icon
 import androidx.compose.ui.res.painterResource
+import org.jetbrains.annotations.VisibleForTesting
 
 var amountInput = mutableStateOf("0")
 
@@ -155,13 +156,22 @@ fun TipTimeLayout() {
     }
 }
 
-private fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String {
+@VisibleForTesting
+internal fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String {
     var tip = tipPercent / 100 * amount
     if (roundUp) {
         tip = kotlin.math.ceil(tip)
     }
     return NumberFormat.getCurrencyInstance().format(tip)
 }
+
+//private fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String {
+//    var tip = tipPercent / 100 * amount
+//    if (roundUp) {
+//        tip = kotlin.math.ceil(tip)
+//    }
+//    return NumberFormat.getCurrencyInstance().format(tip)
+//}
 
 @Preview(showBackground = true)
 @Composable
